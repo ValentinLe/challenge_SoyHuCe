@@ -26,12 +26,15 @@ function visu(data) {
 
 function getHTMLSong(jsonSong) {
   let duree = new Date(jsonSong["trackTimeMillis"]);
+  let minutes = "" + duree.getMinutes();
+  let secondes = duree.getSeconds();
+  secondes = "" + (secondes<10 ? "0" + secondes : secondes);
   return (
     "<div class='item'>" +
-      "<span class='time'>" + duree.getMinutes() + ":" + duree.getSeconds() + "</span>" +
+      "<span class='time'>" + minutes + ":" + secondes + "</span>" +
       "<span class='trackName'>" + jsonSong["trackName"] + "</span>" +
       "<span class='artistName'>" + jsonSong["artistName"] + "</span>" +
-      "<audio controls src=" + jsonSong["previewUrl"] + "></audio>" +
+      "<div class='zoneAudio'><audio controls src=" + jsonSong["previewUrl"] + "></audio></div>" +
       "<button>Voir page</button>" +
     "</div>"
   );

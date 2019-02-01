@@ -24,6 +24,7 @@ body {
 .item {
   display: grid;
   grid-template-columns: 1fr 4fr 4fr 2fr 2fr;
+  grid-column-gap: 2em;
   padding: 10px;
   text-align: center;
   border-radius: 2px;
@@ -59,8 +60,14 @@ body {
   overflow: hidden;
 }
 
+.zoneAudio {
+  display: flex;
+  align-items: center;
+}
+
 .listSong audio {
-  height: 80%;
+  height: 2em;
+  border-radius: 2px;
 }
 
 .listSong button {
