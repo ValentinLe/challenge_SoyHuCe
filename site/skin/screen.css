@@ -1,0 +1,58 @@
+
+html {
+  font-family: sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.searchZone {
+  padding: 20px;
+  text-align: center;
+}
+
+#results {
+  display: grid;
+  grid-template-columns: 1fr;
+  background-color: gold;
+  width: 90%;
+  margin: auto;
+}
+
+.listSong {
+  background-color: blue;
+  width: 100%;
+}
+
+.item {
+  display: grid;
+  grid-template-columns: 4fr 4fr 1fr 1fr;
+  background-color: red;
+  width: 100%;
+  padding: 10px;
+  text-align: center;
+}
+
+.listSong>.item {
+  background-color: #eee;
+}
+
+.listSong>.item:nth-child(odd) {
+  background-color: #aaa;
+}
+
+.listSong>.item:hover {
+  background-color: white;
+  transition: background-color 0.3s;
+}
+
+#results span {
+  padding: 5px;
+  overflow: hidden;
+}
+
+.listSong audio {
+  height: 80%;
+}

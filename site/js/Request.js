@@ -25,13 +25,27 @@ function visu(data) {
 }
 
 function getHTMLSong(jsonSong) {
-  if (jsonSong["kind"] === "song") {
-    return "<audio controls src=" + jsonSong["previewUrl"] + " ></audio>";
-  } else {
-    return "<video controls src=" + jsonSong["previewUrl"] + "></video>";
-  }
+  return (
+    "<div class='item'>" +
+      "<span class='trackName'>" + jsonSong["trackName"] + "</span>" +
+      "<span class='artistName'>" + jsonSong["artistName"] + "</span>" +
+      "<audio controls src=" + jsonSong["previewUrl"] + "></audio>" +
+      "<button>Voir page</button>" +
+    "</div>"
+  );
 }
 
-let url = "https://itunes.apple.com/search?term=patrick+sebastien&limit=10&entity=song";
-let key = "YV95cmKnvDy9GO5BEYeS70pHYwZHy2QktYbGRx8R";
-let value = requestJson(url, (data) => (visu(data)));
+window.onload = main;
+
+function main() {
+  let bSearch = document.getElementById("bSearch");
+  bSearch.onclick = () => {
+    let input = document.getElementById("entry");
+    let text = input.value;
+    if (text !== "") {
+      document.getElementsByClassName("listSong")[0].innerHTML = "";
+      let url = "https://itunes.apple.com/search?term=" + text + "&limit=10&entity=song";
+      let value = requestJson(url, (data) => (visu(data)));
+    }
+  }
+}
