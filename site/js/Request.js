@@ -25,8 +25,10 @@ function visu(data) {
 }
 
 function getHTMLSong(jsonSong) {
+  let duree = new Date(jsonSong["trackTimeMillis"]);
   return (
     "<div class='item'>" +
+      "<span class='time'>" + duree.getMinutes() + ":" + duree.getSeconds() + "</span>" +
       "<span class='trackName'>" + jsonSong["trackName"] + "</span>" +
       "<span class='artistName'>" + jsonSong["artistName"] + "</span>" +
       "<audio controls src=" + jsonSong["previewUrl"] + "></audio>" +
@@ -44,7 +46,7 @@ function main() {
     let text = input.value;
     if (text !== "") {
       document.getElementsByClassName("listSong")[0].innerHTML = "";
-      let url = "https://itunes.apple.com/search?term=" + text + "&limit=10&entity=song";
+      let url = "https://itunes.apple.com/search?term=" + text + "&limit=20&entity=song";
       let value = requestJson(url, (data) => (visu(data)));
     }
   }
