@@ -18,10 +18,23 @@ function requestJson(url, callback) {
 function visu(data) {
   let res = "";
   console.log(data["results"]);
-  for (let jsonSong in data["results"]) {
-    res += getHTMLSong(data["results"][jsonSong])
+  if (data["results"]["length"] !== 0) {
+    setMessage("");
+    for (let jsonSong in data["results"]) {
+      res += getHTMLSong(data["results"][jsonSong])
+    }
+    setResults(res);
+  } else {
+    setMessage("Aucun résultat pour cette recherche");
   }
-  document.getElementsByClassName("listSong")[0].innerHTML = res;
+}
+
+function setResults(htmlString) {
+  document.getElementsByClassName("listSong")[0].innerHTML = htmlString;
+}
+
+function setMessage(message) {
+  document.getElementById("message").innerHTML = message;
 }
 
 function getHTMLSong(jsonSong) {
@@ -44,6 +57,7 @@ window.onload = main;
 
 function main() {
   let bSearch = document.getElementById("bSearch");
+  //$.post("index.php", {test: "oulala"}, () => {});
   bSearch.onclick = () => {
     let input = document.getElementById("entry");
     let text = input.value;
@@ -51,6 +65,8 @@ function main() {
       document.getElementsByClassName("listSong")[0].innerHTML = "";
       let url = "https://itunes.apple.com/search?term=" + text + "&limit=20&entity=song";
       let value = requestJson(url, (data) => (visu(data)));
+    } else {
+      setMessage("Veuillez Entrer une recherche");
     }
   }
 }

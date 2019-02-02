@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="skin/screen.css">
+    <script src="js/jquery/jquery-3.3.1.min.js"></script>
     <script src="js/Request.js"></script>
     <title>Music</title>
   </head>
@@ -10,13 +11,14 @@
     <div class="searchZone">
       <input type="text" id="entry" placeholder="Rechercher..." name="search">
       <button type="button" id="bSearch">Rechercher</button>
+      <p id="message"></p>
     </div>
     <section id="results">
       <div class="item">
         <span>Durée</span>
         <span>Nom piste</span>
         <span>Nom(s) artiste(s)</span>
-        <span>Piste</span>
+        <span>Extrait</span>
         <span>Page</span>
       </div>
       <div class="listSong"></div>
