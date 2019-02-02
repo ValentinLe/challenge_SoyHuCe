@@ -2,15 +2,18 @@
 <html lang="fr" dir="ltr">
   <head>
     <meta charset="utf-8">
+    <title>Recherche</title>
     <link rel="stylesheet" href="skin/screen.css">
-    <script src="js/jquery/jquery-3.3.1.min.js"></script>
-    <script src="js/Request.js"></script>
-    <title>Music</title>
   </head>
   <body>
+    <header>
+      <?php include("parts/nav.php"); ?>
+    </header>
     <div class="searchZone">
-      <input type="text" id="entry" placeholder="Rechercher..." name="search">
-      <button type="button" id="bSearch">Rechercher</button>
+      <form action=<?php echo Router::getSearchPage(); ?> method="post">
+        <input type="text" id="entry" placeholder="Rechercher..." name="search" value='<?php echo str_replace("+", " ", $strSearch); ?>'>
+        <button type="submit" id="bSearch">Rechercher</button>
+      </form>
       <p id="message"></p>
     </div>
     <section id="results">
@@ -21,7 +24,7 @@
         <span>Extrait</span>
         <span>Page</span>
       </div>
-      <div class="listSong"></div>
+      <div class="listSong"><?php echo $listResults; ?></div>
     </section>
   </body>
 </html>

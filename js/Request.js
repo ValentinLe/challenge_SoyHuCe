@@ -62,7 +62,7 @@ function main() {
     let input = document.getElementById("entry");
     let text = input.value;
     if (text !== "") {
-      document.getElementsByClassName("listSong")[0].innerHTML = "";
+      setMessage("");
       let url = "https://itunes.apple.com/search?term=" + text + "&limit=20&entity=song";
       let value = requestJson(url, (data) => (visu(data)));
     } else {
