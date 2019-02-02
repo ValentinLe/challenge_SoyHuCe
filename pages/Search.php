@@ -16,15 +16,17 @@
       </form>
       <p id="message"></p>
     </div>
-    <section id="results">
-      <div class="item">
-        <span>Durée</span>
-        <span>Nom piste</span>
-        <span>Nom(s) artiste(s)</span>
-        <span>Extrait</span>
-        <span>Page</span>
-      </div>
-      <div class="listSong"><?php echo $listResults; ?></div>
-    </section>
+    <form action='<?php echo Router::getSongPath() ?>' method="post">
+      <section id="results">
+        <div class="item">
+          <span>Durée</span>
+          <span>Nom piste</span>
+          <span>Nom(s) artiste(s)</span>
+          <span>Extrait</span>
+          <span>Page</span>
+        </div>
+        <div class="listSong"><?php echo $listResults; ?></div>
+      </section>
+    </form>
   </body>
 </html>

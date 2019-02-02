@@ -25,6 +25,14 @@ class Controller {
     }
   }
 
+  function toPageSong($songId) {
+    $url = "https://itunes.apple.com/lookup?id=$songId";
+    $contents = file_get_contents($url);
+    if($contents !== false){
+      $this->view->makePageSong(json_decode($contents, true)["results"][0]);
+    }
+  }
+
   function htmlesc($str) {
     return htmlspecialchars($str,
             /* on échappe guillemets _et_ apostrophes : */
