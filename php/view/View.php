@@ -33,6 +33,7 @@ class View {
   }
 
   function makePageSong(array $song) {
+    $trackId = $this->getIfExist($song, "trackId");
     $trackName = $this->getIfExist($song, "trackName");
     $artistName = $this->getIfExist($song, "artistName");
     $srcImage = $this->getIfExist($song, "artworkUrl100");
@@ -53,4 +54,7 @@ class View {
     return $minutes . ":" . (strlen("" . $secondes)===1 ? "0". $secondes : $secondes);
   }
 
+  function makeGraphPage() {
+    include("pages/Graph.php");
+  }
 }

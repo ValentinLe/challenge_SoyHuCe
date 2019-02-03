@@ -14,8 +14,10 @@ class Router {
       $controller->toSearchPage($_POST["search"]);
     } elseif (key_exists("search", $_GET)) {
       $controller->toSearchPage($_GET["search"]);
+    } elseif (key_exists("graph", $_GET)) {
+      $controller->toGraphPage();
     } elseif (key_exists("id", $_POST)) {
-      $controller->toPageSong($_POST["id"]);
+      $controller->toPageSong($_POST["id"], true);
     } else {
       $controller->toIndexPage();
     }
@@ -31,6 +33,10 @@ class Router {
 
   static function getSongPath() {
     return "index.php?song";
+  }
+
+  static function getGraphPath() {
+    return "index.php?graph";
   }
 
 }

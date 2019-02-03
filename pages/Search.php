@@ -3,7 +3,8 @@
   <head>
     <meta charset="utf-8">
     <title>Recherche</title>
-    <link rel="stylesheet" href="skin/screen.css">
+    <link rel="stylesheet" href="skin/all.css">
+    <link rel="stylesheet" href="skin/search.css">
   </head>
   <body>
     <header>
