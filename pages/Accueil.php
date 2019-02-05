@@ -10,7 +10,7 @@
       <?php include("parts/nav.php"); ?>
     </header>
     <h1>Accueil</h1>
-    <form action=<?php echo Router::getSearchPage(); ?> method="post">
+    <form action=<?php echo Router::getIndexPath(); ?> method="post">
       <input type="text" id="entry" placeholder="Rechercher..." name="search">
       <button type="submit" id="bSearch">Rechercher</button>
     </form>

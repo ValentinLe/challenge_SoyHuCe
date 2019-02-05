@@ -11,13 +11,13 @@
       <?php include("parts/nav.php"); ?>
     </header>
     <div class="searchZone">
-      <form action=<?php echo Router::getSearchPage(); ?> method="post">
-        <input type="text" id="entry" placeholder="Rechercher..." name="search" value='<?php echo str_replace("+", " ", $strSearch); ?>'>
+      <form action=<?php echo Router::getIndexPath(); ?> method="post">
+        <input type="text" id="entry" placeholder="Rechercher..." name="search" value='<?php echo $_SESSION["search"]; ?>'>
         <button type="submit" id="bSearch">Rechercher</button>
       </form>
       <p id="message"></p>
     </div>
-    <form action='<?php echo Router::getSongPath() ?>' method="post">
+    <form action='<?php echo Router::getSongPath("") ?>' method="post">
       <section id="results">
         <div class="item">
           <span>Durée</span>

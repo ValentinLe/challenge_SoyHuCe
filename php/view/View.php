@@ -2,6 +2,12 @@
 
 class View {
 
+  public $feedback;
+
+  function __construct($feedback) {
+    $this->feedback = $feedback;
+  }
+
   function makeIndexPage() {
     include("pages/Accueil.php");
   }
@@ -10,21 +16,22 @@ class View {
     include("pages/Error.php");
   }
 
-  function makeSearchPage($strSearch, array $search) {
+  function makeSearchPage(ListItem $listItem) {
     $listResults = "";
-    foreach ($search["results"] as $item) {
+    foreach ($listItem->getListItem() as $item) {
       $listResults .= $this->getHTMLItem($item);
     }
     include("pages/Search.php");
   }
 
-  function getHTMLItem(array $item) {
-    return "<div class='item'>" .
-      "<span class='time'>" . $this->getStrDuration($item["trackTimeMillis"]) . "</span>" .
-      "<span class='trackName'>" . $item["trackName"] . "</span>" .
-      "<span class='artistName'>" . $item["artistName"] . "</span>" .
-      "<div class='zoneAudio'><audio controls src=" . $item["previewUrl"] . "></audio></div>" .
-      "<button type='submit' name='id' value=" . $item["trackId"] . ">Voir page</button>" .
+  function getHTMLItem(Item $item) {
+    return
+    "<div class='item'>" .
+      "<span class='time'>" . $this->getStrDuration($item->getValueOf("trackTimeMillis")) . "</span>" .
+      "<span class='trackName'>" . $item->getValueOf("trackName") . "</span>" .
+      "<span class='artistName'>" . $item->getValueOf("artistName") . "</span>" .
+      "<div class='zoneAudio'><audio controls src=" . $item->getValueOf("previewUrl") . "></audio></div>" .
+      "<button type='submit' name='id' value=" . $item->getValueOf("trackId") . ">Voir page</button>" .
     "</div>";
   }
 
@@ -50,7 +57,7 @@ class View {
   function getStrDuration(int $timeMillis) {
     $secondes = floor($timeMillis/1000);
     $minutes = floor($secondes/60);
-    $secondes = $secondes%($minutes*60);
+    $secondes = ($minutes != 0 ? $secondes%($minutes*60) : $secondes);
     return $minutes . ":" . (strlen("" . $secondes)===1 ? "0". $secondes : $secondes);
   }
 
