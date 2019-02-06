@@ -32,4 +32,17 @@ class Controller {
   function toGraphPage() {
     $this->view->makeGraphPage();
   }
+
+  function toListFavoris() {
+    include("db/config.php");
+    $db = new DatabaseFavoris($pg);
+    $data = $db->readAll();
+    $this->view->makeListFavoris($data);
+  }
+
+  function addFavoris($trackId, $trackName, $genre) {
+    include("db/config.php");
+    $db = new DatabaseFavoris($pg);
+    $db->insert($trackId, $trackName, $genre);
+  }
 }

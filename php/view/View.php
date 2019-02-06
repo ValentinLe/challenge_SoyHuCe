@@ -54,6 +54,15 @@ class View {
     include("pages/Song.php");
   }
 
+  function makeListFavoris(array $data) {
+    $list = "<ul>";
+    foreach ($data as $fav) {
+      $list .= "<li>" . $fav["titre"] . " " . $fav["genre"] . "</li>";
+    }
+    $list .= "</ul>";
+    include("pages/Favoris.php");
+  }
+
   function getStrDuration(int $timeMillis) {
     $secondes = floor($timeMillis/1000);
     $minutes = floor($secondes/60);

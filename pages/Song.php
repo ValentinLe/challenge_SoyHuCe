@@ -15,5 +15,12 @@
     <p>Genre : <?php echo $genre; ?></p>
     <p>Album : <?php echo $collectionName; ?></p>
     <p>Prix album : <?php echo $collectionPrice; ?></p>
+    <p class="message"><?php echo $this->feedback; ?></p>
+    <form action=<?php echo Router::getAddFavoris($trackId); ?> method="post">
+      <input type="hidden" name="trackId" value="<?php echo $trackId; ?>">
+      <input type="hidden" name="trackName" value="<?php echo $trackName; ?>">
+      <input type="hidden" name="genre" value="<?php echo $genre; ?>">
+      <button type="submit">Favoris</button>
+    </form>
   </body>
 </html>
