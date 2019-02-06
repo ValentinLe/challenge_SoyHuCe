@@ -3,11 +3,18 @@
 require_once("controller/Controller.php");
 require_once("view/View.php");
 require_once("model/RequestSearchAPI.php");
+require_once("db/DatabaseFavoris.php");
 
 class Router {
 
   function main() {
     session_start();
+
+    include("db/config.php");
+    $db = new DatabaseFavoris($pg);
+    $db->insert("209910535", "Pop");
+    var_dump($db->getAll());
+
     if (!key_exists("feedback", $_SESSION)) {
       $_SESSION["feedback"] = "";
     }
@@ -19,13 +26,13 @@ class Router {
     $controller = new Controller($view);
 
     if (key_exists("search", $_POST)) {
-      $_SESSION["search"] = $_POST["search"];
       $this->POSTredirect($this->getSearchPath($_POST["search"]), $_SESSION["feedback"]);
     } elseif (key_exists("id", $_POST)) {
       $this->POSTredirect($this->getSongPath($_POST["id"]), $_SESSION["feedback"]);
     }
 
     if (key_exists("search", $_GET)) {
+      $_SESSION["search"] = $_GET["search"];
       $controller->toSearchPage($_GET["search"]);
     } elseif (key_exists("graph", $_GET)) {
       $controller->toGraphPage();
