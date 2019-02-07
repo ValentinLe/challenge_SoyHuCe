@@ -6,6 +6,9 @@
     <title><?php echo $trackName; ?></title>
   </head>
   <body>
+    <header>
+      <?php include("parts/nav.php"); ?>
+    </header>
     <img src='<?php echo $srcImage; ?>' width="150" height="150" alt="artwork">
     <p>Piste : <?php echo $trackName; ?> </p>
     <p>Artiste(s) : <a href="<?php echo $urlArtist ?>"><?php echo $artistName; ?></a> </p>
@@ -16,9 +19,9 @@
     <p>Album : <?php echo $collectionName; ?></p>
     <p>Prix album : <?php echo $collectionPrice; ?></p>
     <p class="message"><?php echo $this->feedback; ?></p>
+    <audio controls src= <?php echo $extraitURL; ?>></audio>
     <form action=<?php echo Router::getAddFavoris($trackId); ?> method="post">
       <input type="hidden" name="trackId" value="<?php echo $trackId; ?>">
-      <input type="hidden" name="trackName" value="<?php echo $trackName; ?>">
       <input type="hidden" name="genre" value="<?php echo $genre; ?>">
       <button type="submit">Favoris</button>
     </form>

@@ -26,7 +26,7 @@ class Controller {
 
   function toPageSong($songId) {
     $jsonResult = RequestSearchAPI::getSearchWithId($songId);
-    $this->view->makePageSong($jsonResult);
+    $this->view->makePageSong(new SongItem($jsonResult));
   }
 
   function toGraphPage() {
@@ -37,12 +37,12 @@ class Controller {
     include("db/config.php");
     $db = new DatabaseFavoris($pg);
     $data = $db->readAll();
-    $this->view->makeListFavoris($data);
+    $this->view->makeListFavoris(new ListSongItem($data));
   }
 
-  function addFavoris($trackId, $trackName, $genre) {
+  function addFavoris($trackId, $genre) {
     include("db/config.php");
     $db = new DatabaseFavoris($pg);
-    $db->insert($trackId, $trackName, $genre);
+    $db->insert($trackId, $genre);
   }
 }

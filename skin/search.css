@@ -5,21 +5,28 @@
 }
 
 #results {
-  width: 1300px;
+  width: 80%;
+  min-width: 600px;
   margin: auto;
 }
 
 .item {
   display: grid;
-  grid-template-columns: 1fr 4fr 4fr 3fr 1fr;
+  grid-template-columns: 1fr 4fr 4fr 1fr 1fr;
   grid-column-gap: 20px;
-  padding: 10px;
+  padding: 8px;
   text-align: center;
   border-radius: 2px;
 }
 
 .item * {
   margin: 2px;
+}
+
+.item img {
+  display: flex;
+  vertical-align: middle;
+  margin: auto;
 }
 
 #results>.item {
@@ -47,8 +54,11 @@
   background-color: #f8d3db;
 }
 
+.listSong div {
+  align-items: center;
+}
+
 .listSong span {
-  padding: 8px;
   overflow: hidden;
 }
 

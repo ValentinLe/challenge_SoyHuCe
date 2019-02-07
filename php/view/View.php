@@ -24,14 +24,14 @@ class View {
     include("pages/Search.php");
   }
 
-  function getHTMLItem(Item $item) {
+  function getHTMLItem(SongItem $item) {
     return
     "<div class='item'>" .
-      "<span class='time'>" . $this->getStrDuration($item->getValueOf("trackTimeMillis")) . "</span>" .
-      "<span class='trackName'>" . $item->getValueOf("trackName") . "</span>" .
-      "<span class='artistName'>" . $item->getValueOf("artistName") . "</span>" .
-      "<div class='zoneAudio'><audio controls src=" . $item->getValueOf("previewUrl") . "></audio></div>" .
-      "<button type='submit' name='id' value=" . $item->getValueOf("trackId") . ">Voir page</button>" .
+      "<div><img src='" . $item->getValueOf("artworkUrl60") . "' width=60 height=60 /></div>" .
+      "<div><span>" . $item->getValueOf("trackName") . "</span></div>" .
+      "<div><span>" . $item->getValueOf("artistName") . "</span></div>" .
+      "<div><span>" . $this->getStrDuration($item->getValueOf("trackTimeMillis")) . "</span></div>" .
+      "<div><button type='submit' name='id' value=" . $item->getValueOf("trackId") . ">Plus</button></div>" .
     "</div>";
   }
 
@@ -39,22 +39,25 @@ class View {
     return (key_exists($key, $song) ? $song[$key] : "Non renseigné");
   }
 
-  function makePageSong(array $song) {
-    $trackId = $this->getIfExist($song, "trackId");
-    $trackName = $this->getIfExist($song, "trackName");
-    $artistName = $this->getIfExist($song, "artistName");
-    $srcImage = $this->getIfExist($song, "artworkUrl100");
-    $date = $this->getIfExist($song, "releaseDate");
-    $trackPrice = $this->getIfExist($song, "trackPrice");
-    $collectionName = $this->getIfExist($song, "collectionName");
-    $collectionPrice = $this->getIfExist($song, "collectionPrice");
-    $genre = $this->getIfExist($song, "primaryGenreName");
-    $urlArtist = $this->getIfExist($song, "artistViewUrl");
-    $duree = $this->getStrDuration($this->getIfExist($song, "trackTimeMillis"));
+  function makePageSong(SongItem $song) {
+    $data = $song->getData();
+    $trackId = $this->getIfExist($data, "trackId");
+    $trackName = $this->getIfExist($data, "trackName");
+    $artistName = $this->getIfExist($data, "artistName");
+    $srcImage = $this->getIfExist($data, "artworkUrl100");
+    $date = $this->getIfExist($data, "releaseDate");
+    $trackPrice = $this->getIfExist($data, "trackPrice");
+    $collectionName = $this->getIfExist($data, "collectionName");
+    $collectionPrice = $this->getIfExist($data, "collectionPrice");
+    $genre = $this->getIfExist($data, "primaryGenreName");
+    $urlArtist = $this->getIfExist($data, "artistViewUrl");
+    $duree = $this->getStrDuration($this->getIfExist($data, "trackTimeMillis"));
+    $extraitURL = $data["previewUrl"];
     include("pages/Song.php");
   }
 
-  function makeListFavoris(array $data) {
+  function makeListFavoris(ListItem $listItem) {
+    $data = $listItem->getListItem();
     $list = "<ul>";
     foreach ($data as $fav) {
       $list .= "<li>" . $fav["titre"] . " " . $fav["genre"] . "</li>";

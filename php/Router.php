@@ -10,6 +10,10 @@ class Router {
   function main() {
     session_start();
 
+    if (!key_exists("feedback", $_SESSION)) {
+      $_SESSION["feedback"] = "";
+    }
+
     $view = new View($_SESSION["feedback"]);
     $controller = new Controller($view);
 
@@ -21,8 +25,8 @@ class Router {
     } elseif (key_exists("id", $_POST)) {
       $this->POSTredirect($this->getSongPath($_POST["id"]), $_SESSION["feedback"]);
     }
-    if (key_exists("trackId", $_POST) && key_exists("trackName", $_POST) && key_exists("genre", $_POST)) {
-      $controller->addFavoris($_POST["trackId"], $_POST["trackName"], $_POST["genre"]);
+    if (key_exists("trackId", $_POST) && key_exists("genre", $_POST)) {
+      $controller->addFavoris($_POST["trackId"], $_POST["genre"]);
       $this->POSTredirect($this->getSongPath($_POST["trackId"]), "Ajouté aux favoris.");
     }
 
