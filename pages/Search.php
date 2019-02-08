@@ -5,6 +5,7 @@
     <title>Recherche</title>
     <link rel="stylesheet" href="skin/all.css">
     <link rel="stylesheet" href="skin/search.css">
+    <link rel="stylesheet" href="skin/listItem.css">
   </head>
   <body>
     <header>

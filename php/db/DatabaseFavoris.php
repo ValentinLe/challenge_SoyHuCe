@@ -2,6 +2,14 @@
 
 class DatabaseFavoris {
 
+  const COL_USER_ID = "userid";
+  const COL_USER_LOGIN = "login";
+  const COL_USER_PASSWORD = "password";
+
+  const COL_FAV_USERID = "userid";
+  const COL_FAV_TRACKID = "trackid";
+  const COL_FAV_TYPE = "type";
+
   private $db;
   private $userId;
 
@@ -21,7 +29,7 @@ class DatabaseFavoris {
   }
 
   function addFavoris($trackId, $type) {
-    $sql = 'INSERT INTO Favoris(userid,trackid,genre) VALUES(:userid,:trackid,:type)';
+    $sql = 'INSERT INTO Favoris(userid,trackid,type) VALUES(:userid,:trackid,:type)';
     $stmt = $this->db->prepare($sql);
 
     // pass values to the statement

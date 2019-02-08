@@ -4,7 +4,7 @@ create database favoris_itunes;
 
 \c favoris_itunes
 
--- SERIAL = INT AUTO INCREMENT en PostgreSQL
+-- SERIAL = INT AUTO INCREMENT c'est mieux pour PostgreSQL
 create table Utilisateur (
 	userId SERIAL,
 	login VARCHAR(350),

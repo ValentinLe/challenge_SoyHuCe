@@ -14,4 +14,10 @@ class RequestSearchAPI {
     $contents = file_get_contents($url);
     return json_decode($contents, true)["results"][0];
   }
+
+  static function getSearchWithIds($tracksId) {
+    $url = "https://itunes.apple.com/lookup?id=$tracksId";
+    $contents = file_get_contents($url);
+    return json_decode($contents, true)["results"];
+  }
 }

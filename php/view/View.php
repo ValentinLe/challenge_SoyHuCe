@@ -58,11 +58,10 @@ class View {
 
   function makeListFavoris(ListSongItem $listItem) {
     $data = $listItem->getListItem();
-    $list = "<ul>";
+    $list = "";
     foreach ($data as $fav) {
-      $list .= "<li>" . $fav->getValueOf("trackid") . " " . $fav->getValueOf("genre") . "</li>";
+      $list .= $this->getHTMLItem($fav);
     }
-    $list .= "</ul>";
     include("pages/Favoris.php");
   }
 

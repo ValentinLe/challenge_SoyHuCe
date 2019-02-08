@@ -37,13 +37,23 @@ class Controller {
     include("db/config.php");
     $db = new DatabaseFavoris($pg);
     $data = $db->readAll();
-    $this->view->makeListFavoris(new ListSongItem($data));
+    $ids = $this->createStringID($data);
+    $jsonResult = RequestSearchAPI::getSearchWithIds($ids);
+    $this->view->makeListFavoris(new ListSongItem($jsonResult));
   }
 
-  function addFavoris($trackId, $genre) {
+  function createStringID(array $list) {
+    $res = "";
+    foreach ($list as $fav) {
+      $res .= $fav[DatabaseFavoris::COL_FAV_TRACKID] . ",";
+    }
+    return $res;
+  }
+
+  function addFavoris($trackId, $type) {
     include("db/config.php");
     $db = new DatabaseFavoris($pg);
-    $db->addFavoris($trackId, $genre);
+    $db->addFavoris($trackId, $type);
   }
 
   function toConnexionPage() {
