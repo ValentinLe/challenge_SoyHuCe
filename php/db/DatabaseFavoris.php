@@ -20,15 +20,26 @@ class DatabaseFavoris {
     return $query->fetch(PDO::FETCH_ASSOC);
   }
 
-  function insert($trackId, $genre) {
-    $sql = 'INSERT INTO Favoris(userid,trackid,genre) VALUES(:userid,:trackid,:genre)';
-    var_dump($trackId . " " . $genre);
+  function addFavoris($trackId, $type) {
+    $sql = 'INSERT INTO Favoris(userid,trackid,genre) VALUES(:userid,:trackid,:type)';
     $stmt = $this->db->prepare($sql);
 
     // pass values to the statement
     $stmt->bindValue(':userid', $this->userId);
     $stmt->bindValue(':trackid', $trackId);
-    $stmt->bindValue(':genre', $genre);
+    $stmt->bindValue(':type', $type);
+
+    // execute the insert statement
+    $stmt->execute();
+  }
+
+  function createUser($login, $password) {
+    $sql = 'INSERT INTO Utilisateur(login,password) VALUES(:login,:password)';
+    $stmt = $this->db->prepare($sql);
+
+    // pass values to the statement
+    $stmt->bindValue(':login', $login);
+    $stmt->bindValue(':password', $password);
 
     // execute the insert statement
     $stmt->execute();

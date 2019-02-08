@@ -17,6 +17,12 @@ class Router {
     $view = new View($_SESSION["feedback"]);
     $controller = new Controller($view);
 
+    if (key_exists("login", $_POST)) {
+      $_SESSION["login"] = $_POST["login"];
+      $_SESSION["password"] = $_POST["password"];
+      $controller->createUser($_POST["login"], $_POST["password"]);
+    }
+
     $_SESSION["feedback"] = "";
     $_SESSION["search"] = "";
 
@@ -39,6 +45,8 @@ class Router {
       $controller->toListFavoris();
     } elseif (key_exists("id", $_GET)) {
       $controller->toPageSong($_GET["id"], true);
+    } elseif (key_exists("create", $_GET)) {
+      $controller->toConnexionPage();
     } else {
       $controller->toIndexPage();
     }
@@ -71,5 +79,9 @@ class Router {
 
   static function getFavorisPath() {
     return "index.php?favoris";
+  }
+
+  static function getConnexionPath() {
+    return "index.php?create";
   }
 }

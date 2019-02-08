@@ -56,11 +56,11 @@ class View {
     include("pages/Song.php");
   }
 
-  function makeListFavoris(ListItem $listItem) {
+  function makeListFavoris(ListSongItem $listItem) {
     $data = $listItem->getListItem();
     $list = "<ul>";
     foreach ($data as $fav) {
-      $list .= "<li>" . $fav["titre"] . " " . $fav["genre"] . "</li>";
+      $list .= "<li>" . $fav->getValueOf("trackid") . " " . $fav->getValueOf("genre") . "</li>";
     }
     $list .= "</ul>";
     include("pages/Favoris.php");
@@ -75,5 +75,9 @@ class View {
 
   function makeGraphPage() {
     include("pages/Graph.php");
+  }
+
+  function makeConnexionPage() {
+    include("pages/CreateUser.php");
   }
 }

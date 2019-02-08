@@ -3,4 +3,5 @@
   <a href=<?php echo Router::getSearchPath(""); ?>>Rechercher</a>
   <a href=<?php echo Router::getFavorisPath(); ?>>Favoris</a>
   <a href=<?php echo Router::getGraphPath(); ?>>Graphique</a>
+  <a href=<?php echo Router::getConnexionPath(); ?>>Créer compte</a>
 </nav>

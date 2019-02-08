@@ -43,6 +43,17 @@ class Controller {
   function addFavoris($trackId, $genre) {
     include("db/config.php");
     $db = new DatabaseFavoris($pg);
-    $db->insert($trackId, $genre);
+    $db->addFavoris($trackId, $genre);
   }
+
+  function toConnexionPage() {
+    $this->view->makeConnexionPage();
+  }
+
+  function createUser($login, $password) {
+    include("db/config.php");
+    $db = new DatabaseFavoris($pg);
+    $db->createUser($login, $password);
+  }
+
 }

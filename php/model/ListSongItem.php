@@ -7,8 +7,8 @@ class ListSongItem implements ListItem {
 
   private $listItem;
 
-  function __construct(array $listSong) {
-    $this->listItem = $this->transformToListSongItem($listSong);
+  function __construct(array $jsonListSong) {
+    $this->listItem = $this->transformToListSongItem($jsonListSong);
   }
 
   function transformToListSongItem($listSong) {
