@@ -41,6 +41,18 @@ class DatabaseFavoris {
     $stmt->execute();
   }
 
+  function removeFavoris($trackId) {
+    $sql = 'DELETE FROM Favoris WHERE userid = :userid AND trackid = :trackid';
+    $stmt = $this->db->prepare($sql);
+
+    // pass values to the statement
+    $stmt->bindValue(':userid', $this->userId);
+    $stmt->bindValue(':trackid', $trackId);
+
+    // execute the insert statement
+    $stmt->execute();
+  }
+
   function createUser($login, $password) {
     $sql = 'INSERT INTO Utilisateur(login,password) VALUES(:login,:password)';
     $stmt = $this->db->prepare($sql);
@@ -57,4 +69,5 @@ class DatabaseFavoris {
     $query = $this->db->query('SELECT type, count(type) FROM Favoris GROUP BY type;');
     return $query->fetchAll(PDO::FETCH_ASSOC);
   }
+
 }

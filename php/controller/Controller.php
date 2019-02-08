@@ -6,9 +6,11 @@ require_once("model/ListSongItem.php");
 class Controller {
 
   private $view;
+  private $db;
 
-  function __construct(View $view) {
+  function __construct(View $view, DatabaseFavoris $db) {
     $this->view = $view;
+    $this->db = $db;
   }
 
   function toIndexPage() {
@@ -30,16 +32,12 @@ class Controller {
   }
 
   function toGraphPage() {
-    include("db/config.php");
-    $db = new DatabaseFavoris($pg);
-    $res = $db->getStats();
+    $res = $this->db->getStats();
     $this->view->makeGraphPage($res);
   }
 
   function toListFavoris() {
-    include("db/config.php");
-    $db = new DatabaseFavoris($pg);
-    $data = $db->readAll();
+    $data = $this->db->readAll();
     $ids = $this->createStringID($data);
     $jsonResult = RequestSearchAPI::getSearchWithIds($ids);
     $this->view->makeListFavoris(new ListSongItem($jsonResult));
@@ -54,9 +52,11 @@ class Controller {
   }
 
   function addFavoris($trackId, $type) {
-    include("db/config.php");
-    $db = new DatabaseFavoris($pg);
-    $db->addFavoris($trackId, $type);
+    $this->db->addFavoris($trackId, $type);
+  }
+
+  function removeFavoris($trackId) {
+    $this->db->removeFavoris($trackId);
   }
 
   function toConnexionPage() {
@@ -64,9 +64,7 @@ class Controller {
   }
 
   function createUser($login, $password) {
-    include("db/config.php");
-    $db = new DatabaseFavoris($pg);
-    $db->createUser($login, $password);
+    $this->db->createUser($login, $password);
   }
 
 }

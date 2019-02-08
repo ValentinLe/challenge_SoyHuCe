@@ -14,8 +14,9 @@ class Router {
       $_SESSION["feedback"] = "";
     }
 
+    include("db/config.php");
     $view = new View($_SESSION["feedback"]);
-    $controller = new Controller($view);
+    $controller = new Controller($view, new DatabaseFavoris($pg));
 
     if (key_exists("login", $_POST)) {
       $_SESSION["login"] = $_POST["login"];
@@ -27,9 +28,9 @@ class Router {
     $_SESSION["search"] = "";
 
     if (key_exists("search", $_POST)) {
-      $this->POSTredirect($this->getSearchPath($_POST["search"]), $_SESSION["feedback"]);
+      $this->POSTredirect($this->getSearchPath($_POST["search"]), "");
     } elseif (key_exists("id", $_POST)) {
-      $this->POSTredirect($this->getSongPath($_POST["id"]), $_SESSION["feedback"]);
+      $this->POSTredirect($this->getSongPath($_POST["id"]), "");
     }
     if (key_exists("trackId", $_POST) && key_exists("genre", $_POST)) {
       $controller->addFavoris($_POST["trackId"], $_POST["genre"]);
