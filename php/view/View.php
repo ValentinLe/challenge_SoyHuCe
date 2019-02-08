@@ -16,7 +16,7 @@ class View {
     include("pages/Error.php");
   }
 
-  function makeSearchPage(ListItem $listItem) {
+  function makeSearchPage(ListSongItem $listItem) {
     $listResults = "";
     foreach ($listItem->getListItem() as $item) {
       $listResults .= $this->getHTMLItem($item);
@@ -72,7 +72,15 @@ class View {
     return $minutes . ":" . (strlen("" . $secondes)===1 ? "0". $secondes : $secondes);
   }
 
-  function makeGraphPage() {
+  function makeGraphPage(array $data) {
+    $labels = "[";
+    $values = "[";
+    foreach ($data as $line) {
+      $labels .= "\"". $line["type"] . "\",";
+      $values .= $line["count"] . ",";
+    }
+    $labels .= "]";
+    $values .= "]";
     include("pages/Graph.php");
   }
 

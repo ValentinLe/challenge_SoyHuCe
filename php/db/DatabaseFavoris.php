@@ -52,4 +52,9 @@ class DatabaseFavoris {
     // execute the insert statement
     $stmt->execute();
   }
+
+  function getStats() {
+    $query = $this->db->query('SELECT type, count(type) FROM Favoris GROUP BY type;');
+    return $query->fetchAll(PDO::FETCH_ASSOC);
+  }
 }

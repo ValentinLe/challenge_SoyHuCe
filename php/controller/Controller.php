@@ -30,7 +30,10 @@ class Controller {
   }
 
   function toGraphPage() {
-    $this->view->makeGraphPage();
+    include("db/config.php");
+    $db = new DatabaseFavoris($pg);
+    $res = $db->getStats();
+    $this->view->makeGraphPage($res);
   }
 
   function toListFavoris() {
