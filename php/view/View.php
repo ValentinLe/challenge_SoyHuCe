@@ -45,7 +45,7 @@ class View {
     return (key_exists($key, $song) ? $song[$key] : "Non renseigné");
   }
 
-  function makePageSong(SongItem $song) {
+  function makePageSong(SongItem $song, $isFavoris) {
     $data = $song->getData();
     $trackId = $this->getIfExist($data, "trackId");
     $trackName = $this->getIfExist($data, "trackName");
@@ -59,6 +59,19 @@ class View {
     $urlArtist = $this->getIfExist($data, "artistViewUrl");
     $duree = $this->getStrDuration($this->getIfExist($data, "trackTimeMillis"));
     $extraitURL = $data["previewUrl"];
+    $favoris = "";
+    if ($isFavoris === true) {
+      $favoris = "<form action=" . Router::getSupprFavoris($trackId) . " method='post'>
+        <input type='hidden' name='delTrackId' value=$trackId>
+        <button type='submit'>Supprimer</button>
+      </form>";
+    } elseif ($isFavoris === false) {
+      $favoris = "<form action=" . Router::getAddFavoris($trackId) . " method='post'>
+        <input type='hidden' name='addTrackId' value=$trackId>
+        <input type='hidden' name='genre' value=$genre>
+        <button type='submit'>Favoris</button>
+      </form>";
+    }
     include("pages/Song.php");
   }
 
@@ -97,4 +110,17 @@ class View {
   function makeConnexionPage() {
     include("pages/Connexion.php");
   }
+
+  public static function htmlesc($str) {
+        return htmlspecialchars($str,
+            /* on échappe guillemets _et_ apostrophes : */
+            ENT_QUOTES
+            /* les séquences UTF-8 invalides sont
+            * remplacées par le caractère �
+            * au lieu de renvoyer la chaîne vide…) */
+            | ENT_SUBSTITUTE
+            /* on utilise les entités HTML5 (en particulier &apos;) */
+            | ENT_HTML5,
+            'UTF-8');
+    }
 }

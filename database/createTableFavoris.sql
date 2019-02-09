@@ -20,5 +20,10 @@ create table Favoris (
 	primary key (userId,trackId)
 );
 
-insert into utilisateur (login, password) values ('admin', 'admin');
+/*
+ajout =>
+	login : admin
+	password : admin
+*/
+insert into utilisateur (login, password) values ('admin', '$2y$10$lGwOSByZzPtlTE5VtUvS6O5yDHf3I1XnkfGD7dzOfbzhBWGs4eoZG ');
 

@@ -28,7 +28,8 @@ class Controller {
 
   function toPageSong($songId) {
     $jsonResult = RequestSearchAPI::getSearchWithId($songId);
-    $this->view->makePageSong(new SongItem($jsonResult));
+    $isFavoris = $this->db->infavoris($songId);
+    $this->view->makePageSong(new SongItem($jsonResult), $isFavoris);
   }
 
   function toGraphPage() {
@@ -64,7 +65,7 @@ class Controller {
   }
 
   function createUser($login, $password) {
-    $this->db->createUser($login, $password);
+    $this->db->createUser($login, password_hash($password, PASSWORD_BCRYPT));
   }
 
   function toConnexionPage() {
@@ -72,7 +73,10 @@ class Controller {
   }
 
   function connect($login, $password) {
-    $user = $this->db->getUser($login, $password);
+    $user = $this->db->getUser($login);
+    if ($user !== false && !password_verify($password, substr($user["password"], 0, 60))) {
+      $user = false;
+    }
     return $user;
   }
 

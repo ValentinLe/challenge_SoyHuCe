@@ -74,9 +74,14 @@ class DatabaseFavoris {
     return $query->fetchAll(PDO::FETCH_ASSOC);
   }
 
-  function getUser($login, $password) {
-    $query = $this->db->query("SELECT userid, login FROM Utilisateur WHERE login='$login' AND password='$password'");
+  function getUser($login) {
+    $query = $this->db->query("SELECT * FROM Utilisateur WHERE login='$login'");
     return $query->fetch(PDO::FETCH_ASSOC);
+  }
+
+  function inFavoris($trackId) {
+    $query = $this->db->query("SELECT * FROM Favoris WHERE userid='$this->userId' AND trackid=$trackId");
+    return $query->fetch(PDO::FETCH_ASSOC) !== false;
   }
 
 }

@@ -20,10 +20,6 @@
     <p>Prix album : <?php echo $collectionPrice; ?></p>
     <p class="message"><?php echo $this->feedback; ?></p>
     <audio controls src= <?php echo $extraitURL; ?>></audio>
-    <form action=<?php echo Router::getAddFavoris($trackId); ?> method="post">
-      <input type="hidden" name="trackId" value="<?php echo $trackId; ?>">
-      <input type="hidden" name="genre" value="<?php echo $genre; ?>">
-      <button type="submit">Favoris</button>
-    </form>
+    <?php echo $favoris; ?>
   </body>
 </html>
