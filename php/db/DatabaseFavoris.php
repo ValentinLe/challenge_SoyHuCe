@@ -70,7 +70,7 @@ class DatabaseFavoris {
   }
 
   function getStats() {
-    $query = $this->db->query('SELECT type, count(type) FROM Favoris GROUP BY type;');
+    $query = $this->db->query("SELECT type, count(type) FROM Favoris WHERE userid=$this->userId GROUP BY type;");
     return $query->fetchAll(PDO::FETCH_ASSOC);
   }
 

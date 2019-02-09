@@ -14,6 +14,8 @@ class Router {
       $_SESSION["feedback"] = "";
     }
 
+    $isConnected = false;
+
     include("db/config.php");
     $view = new View($_SESSION["feedback"], false);
     $db = new DatabaseFavoris($pg, -1);
@@ -21,25 +23,26 @@ class Router {
 
     if (key_exists("login", $_POST)) {
       $user = $controller->connect($_POST["login"], $_POST["password"]);
-      if (key_exists("login", $user)) {
+      if ($user !== false && key_exists("login", $user)) {
         $_SESSION["userid"] = $user["userid"];
         $_SESSION["login"] = $user["login"];
         $view->setConnexion(true);
+        $isConnected = true;
+      } else {
+        $this->POSTredirect($this->getConnexionPath(), "Le login ou mot de passe est incorrect");
       }
     }
 
     if (key_exists("login", $_SESSION)) {
       $db->setUserId($_SESSION["userid"]);
       $view->setConnexion(true);
+      $isConnected = true;
     }
 
     if (key_exists("newLogin", $_POST)) {
       $_SESSION["login"] = $_POST["newLogin"];
       $controller->createUser($_POST["newLogin"], $_POST["newPassword"]);
     }
-
-    $_SESSION["feedback"] = "";
-    $_SESSION["search"] = "";
 
     if (key_exists("search", $_POST)) {
       $this->POSTredirect($this->getSearchPath($_POST["search"]), "");
@@ -51,13 +54,22 @@ class Router {
       $this->POSTredirect($this->getSongPath($_POST["trackId"]), "Ajouté aux favoris.");
     }
 
+    // Gestion du GET
     if (key_exists("search", $_GET)) {
       $_SESSION["search"] = $_GET["search"];
       $controller->toSearchPage($_GET["search"]);
     } elseif (key_exists("graph", $_GET)) {
-      $controller->toGraphPage();
+      if ($isConnected === true) {
+        $controller->toGraphPage();
+      } else {
+        $controller->toConnexionPage();
+      }
     } elseif (key_exists("favoris", $_GET)) {
-      $controller->toListFavoris();
+      if ($isConnected === true) {
+        $controller->toListFavoris();
+      } else {
+        $controller->toConnexionPage();
+      }
     } elseif (key_exists("id", $_GET)) {
       $controller->toPageSong($_GET["id"], true);
     } elseif (key_exists("create", $_GET)) {
@@ -70,7 +82,9 @@ class Router {
     } else {
       $controller->toIndexPage();
     }
-  }
+    
+  } // --------------------- FIN MAIN ---------------------
+
 
   function POSTredirect($url, $feedback) {
     $_SESSION['feedback'] = $feedback;
