@@ -15,13 +15,27 @@ class Router {
     }
 
     include("db/config.php");
-    $view = new View($_SESSION["feedback"]);
-    $controller = new Controller($view, new DatabaseFavoris($pg));
+    $view = new View($_SESSION["feedback"], false);
+    $db = new DatabaseFavoris($pg, -1);
+    $controller = new Controller($view, $db);
 
     if (key_exists("login", $_POST)) {
-      $_SESSION["login"] = $_POST["login"];
-      $_SESSION["password"] = $_POST["password"];
-      $controller->createUser($_POST["login"], $_POST["password"]);
+      $user = $controller->connect($_POST["login"], $_POST["password"]);
+      if (key_exists("login", $user)) {
+        $_SESSION["userid"] = $user["userid"];
+        $_SESSION["login"] = $user["login"];
+        $view->setConnexion(true);
+      }
+    }
+
+    if (key_exists("login", $_SESSION)) {
+      $db->setUserId($_SESSION["userid"]);
+      $view->setConnexion(true);
+    }
+
+    if (key_exists("newLogin", $_POST)) {
+      $_SESSION["login"] = $_POST["newLogin"];
+      $controller->createUser($_POST["newLogin"], $_POST["newPassword"]);
     }
 
     $_SESSION["feedback"] = "";
@@ -47,7 +61,12 @@ class Router {
     } elseif (key_exists("id", $_GET)) {
       $controller->toPageSong($_GET["id"], true);
     } elseif (key_exists("create", $_GET)) {
+      $controller->toCreateUserPage();
+    } elseif (key_exists("connexion", $_GET)) {
       $controller->toConnexionPage();
+    } elseif (key_exists("deconnexion", $_GET)) {
+      unset($_SESSION["login"]);
+      $this->redirect($this->getIndexPath());
     } else {
       $controller->toIndexPage();
     }
@@ -55,6 +74,10 @@ class Router {
 
   function POSTredirect($url, $feedback) {
     $_SESSION['feedback'] = $feedback;
+    header("Location: " . $url, true, 303);
+  }
+
+  function redirect($url) {
     header("Location: " . $url, true, 303);
   }
 
@@ -82,7 +105,15 @@ class Router {
     return "index.php?favoris";
   }
 
-  static function getConnexionPath() {
+  static function getCreateUserPath() {
     return "index.php?create";
+  }
+
+  static function getConnexionPath() {
+    return "index.php?connexion";
+  }
+
+  static function getDeconnexionPath() {
+    return "index.php?deconnexion";
   }
 }

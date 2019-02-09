@@ -3,9 +3,15 @@
 class View {
 
   public $feedback;
+  public $isConnected;
 
-  function __construct($feedback) {
+  function __construct($feedback, $isConnected) {
     $this->feedback = $feedback;
+    $this->isConnected = $isConnected;
+  }
+
+  function setConnexion($newState) {
+    $this->isConnected = $newState;
   }
 
   function makeIndexPage() {
@@ -84,7 +90,11 @@ class View {
     include("pages/Graph.php");
   }
 
-  function makeConnexionPage() {
+  function makeCreateUserPage() {
     include("pages/CreateUser.php");
+  }
+
+  function makeConnexionPage() {
+    include("pages/Connexion.php");
   }
 }

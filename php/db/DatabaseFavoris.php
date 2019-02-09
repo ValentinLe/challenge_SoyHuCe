@@ -13,13 +13,17 @@ class DatabaseFavoris {
   private $db;
   private $userId;
 
-  function __construct($PDO_db) {
+  function __construct($PDO_db, $userId) {
     $this->db = $PDO_db;
-    $this->userId = 1;
+    $this->userId = $userId;
+  }
+
+  function setUserId($userId) {
+    $this->userId = $userId;
   }
 
   function readAll() {
-    $query = $this->db->query("SELECT * FROM Favoris WHERE userId=$this->userId;");
+    $query = $this->db->query("SELECT * FROM Favoris WHERE userId='$this->userId';");
     return $query->fetchAll(PDO::FETCH_ASSOC);
   }
 
@@ -68,6 +72,11 @@ class DatabaseFavoris {
   function getStats() {
     $query = $this->db->query('SELECT type, count(type) FROM Favoris GROUP BY type;');
     return $query->fetchAll(PDO::FETCH_ASSOC);
+  }
+
+  function getUser($login, $password) {
+    $query = $this->db->query("SELECT userid, login FROM Utilisateur WHERE login='$login' AND password='$password'");
+    return $query->fetch(PDO::FETCH_ASSOC);
   }
 
 }

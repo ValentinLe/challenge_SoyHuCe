@@ -59,12 +59,21 @@ class Controller {
     $this->db->removeFavoris($trackId);
   }
 
-  function toConnexionPage() {
-    $this->view->makeConnexionPage();
+  function toCreateUserPage() {
+    $this->view->makeCreateUserPage();
   }
 
   function createUser($login, $password) {
     $this->db->createUser($login, $password);
+  }
+
+  function toConnexionPage() {
+    $this->view->makeConnexionPage();
+  }
+
+  function connect($login, $password) {
+    $user = $this->db->getUser($login, $password);
+    return $user;
   }
 
 }
