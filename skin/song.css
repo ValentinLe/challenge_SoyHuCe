@@ -19,16 +19,6 @@ section h1 {
   grid-column: span 2;
 }
 
-section h2 {
-  padding: 8px;
-  border-bottom: 1px solid #E0E0E0;
-}
-
-
-p {
-  margin-left: 16px;
-}
-
 .top {
   grid-template-columns: 1fr 3fr;
 }

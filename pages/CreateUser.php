@@ -11,9 +11,12 @@
     </header>
     <main>
       <h1>Création d'un nouveau compte</h1>
+      <p><?php echo $this->feedback; ?></p>
       <form action=<?php echo Router::getIndexPath(); ?> method="post">
-        <label>Login : <input type="text" name="newLogin" required /></label>
-        <label>Mot de passe : <input type="password" name="newPassword" required /></label>
+        <div class="zoneInput">
+          <label>Login <input type="text" name="newLogin" required /></label>
+          <label>Mot de passe <input type="password" name="newPassword" required /></label>
+        </div>
         <button type="submit">Créer le compte</button>
       </form>
     </main>

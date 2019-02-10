@@ -1,0 +1,30 @@
+
+main {
+  width: 800px;
+}
+
+form {
+  margin: auto;
+  width: 70%;
+  padding: 16px;
+}
+
+.zoneInput {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+form label {
+  margin: 16px;
+  text-indent: 16px;
+}
+
+form input {
+  width: 100%;
+  margin: 8px;
+}
+
+form button {
+  display: block;
+  margin: auto;
+}

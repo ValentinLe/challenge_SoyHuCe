@@ -1,0 +1,10 @@
+
+section {
+  padding: 16px;
+  width: 95%;
+  margin: auto;
+}
+
+h2:first-child {
+  margin-top: 0;
+}

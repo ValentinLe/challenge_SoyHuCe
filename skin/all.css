@@ -7,13 +7,13 @@ html {
 body {
   margin: 0;
   padding: 0;
+  min-width: 600px;
 }
 
 main {
   width: 90%;
   background-color: white;
-  margin: auto;
-  margin-top: 32px;
+  margin: 32px auto;
   box-shadow: 0 0 0 1px rgba(0,0,0,.15), 0 2px 3px rgba(0,0,0,.2);
 }
 
@@ -24,6 +24,15 @@ h1 {
   color: white;
   border-bottom: 3px solid white;
   text-align: center;
+}
+
+section h2 {
+  padding: 8px;
+  border-bottom: 1px solid #E0E0E0;
+}
+
+section p {
+  margin: 0 16px;
 }
 
 /* menu */
@@ -108,10 +117,4 @@ form button:hover {
 
 form button:active {
   transform: scale(0.99);
-}
-
-@media (max-width: 600px) {
-  body {
-    width: 600px;
-  }
 }
