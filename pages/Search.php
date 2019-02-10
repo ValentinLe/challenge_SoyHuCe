@@ -19,7 +19,7 @@
       <p id="message"></p>
     </div>
     <form action='<?php echo Router::getSongPath("") ?>' method="post">
-      <main id="results">
+      <div id="results">
         <div class="item">
           <span>Logo</span>
           <span>Nom piste</span>
@@ -28,7 +28,7 @@
           <span>Page</span>
         </div>
         <div class="listSong"><?php echo $listResults; ?></div>
-      </main>
+      </div>
     </form>
   </body>
 </html>

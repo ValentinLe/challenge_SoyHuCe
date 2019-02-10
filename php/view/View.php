@@ -51,7 +51,7 @@ class View {
     $trackName = $this->getIfExist($data, "trackName");
     $artistName = $this->getIfExist($data, "artistName");
     $srcImage = $this->getIfExist($data, "artworkUrl100");
-    $date = $this->getIfExist($data, "releaseDate");
+    $date = $this->getStringDate($this->getIfExist($data, "releaseDate"));
     $trackPrice = $this->getIfExist($data, "trackPrice");
     $collectionName = $this->getIfExist($data, "collectionName");
     $collectionPrice = $this->getIfExist($data, "collectionPrice");
@@ -61,18 +61,28 @@ class View {
     $extraitURL = $data["previewUrl"];
     $favoris = "";
     if ($isFavoris === true) {
-      $favoris = "<form action=" . Router::getSupprFavoris($trackId) . " method='post'>
+      $favoris = "
+      <p>Ce morceau est présent dans vos favoris.</p>
+      <form action=" . Router::getSupprFavoris($trackId) . " method='post'>
         <input type='hidden' name='delTrackId' value=$trackId>
-        <button type='submit'>Supprimer</button>
+        <button class='buttonRed' type='submit'>Supprimer</button>
       </form>";
     } elseif ($isFavoris === false) {
-      $favoris = "<form action=" . Router::getAddFavoris($trackId) . " method='post'>
+      $favoris = "
+      <p>Ce morceau n'est pas dans vos favoris.</p>
+      <form action=" . Router::getAddFavoris($trackId) . " method='post'>
         <input type='hidden' name='addTrackId' value=$trackId>
         <input type='hidden' name='genre' value=$genre>
-        <button type='submit'>Favoris</button>
+        <button class='buttonYellow' type='submit'>Favoris</button>
       </form>";
     }
     include("pages/Song.php");
+  }
+
+  function getStringDate($dateStr) {
+    $extractionDate = explode("T", $dateStr)[0];
+    $splitDate = explode("-", $extractionDate);
+    return $splitDate[2] . "/" . $splitDate[1] . "/" . $splitDate[0];
   }
 
   function makeListFavoris(ListSongItem $listItem) {

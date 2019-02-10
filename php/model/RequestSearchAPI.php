@@ -12,7 +12,12 @@ class RequestSearchAPI {
   static function getSearchWithId($trackId) {
     $url = "https://itunes.apple.com/lookup?id=$trackId";
     $contents = file_get_contents($url);
-    return json_decode($contents, true)["results"][0];
+    $json = json_decode($contents, true);
+    if ($json["resultCount"] === 1) {
+      return $json["results"][0];
+    } else {
+      return null;
+    }
   }
 
   static function getSearchWithIds($tracksId) {

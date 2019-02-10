@@ -9,11 +9,13 @@
     <header>
       <?php include("parts/nav.php"); ?>
     </header>
-    <h1>Création d'un nouveau compte</h1>
-    <form action=<?php echo Router::getIndexPath(); ?> method="post">
-      <label>Login : <input type="text" name="newLogin" required /></label>
-      <label>Mot de passe : <input type="password" name="newPassword" required /></label>
-      <button type="submit">Créer le compte</button>
-    </form>
+    <main>
+      <h1>Création d'un nouveau compte</h1>
+      <form action=<?php echo Router::getIndexPath(); ?> method="post">
+        <label>Login : <input type="text" name="newLogin" required /></label>
+        <label>Mot de passe : <input type="password" name="newPassword" required /></label>
+        <button type="submit">Créer le compte</button>
+      </form>
+    </main>
   </body>
 </html>

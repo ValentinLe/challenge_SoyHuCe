@@ -1,0 +1,66 @@
+
+main {
+  width: 60%;
+  margin: auto;
+  margin-top: 2em;
+  box-shadow: 0 0 0 1px rgba(0,0,0,.15), 0 2px 3px rgba(0,0,0,.2);
+}
+
+section {
+  display: grid;
+  background-color: white;
+}
+
+section div {
+  padding: 32px;
+}
+
+section h1 {
+  grid-column: span 2;
+}
+
+section h2 {
+  padding: 8px;
+  border-bottom: 1px solid #E0E0E0;
+}
+
+
+p {
+  margin-left: 16px;
+}
+
+.top {
+  grid-template-columns: 1fr 3fr;
+}
+
+#zoneImg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+audio {
+  display: block;
+  width: 50%;
+  margin: auto;
+}
+
+.bot {
+  grid-template-columns: 1fr 1fr;
+  padding-bottom: 16px;
+}
+
+.buttonRed, .buttonYellow {
+  display: block;
+  margin: auto;
+}
+
+.buttonYellow {
+  color: black;
+  background-color: #FFF176;
+}
+
+.buttonRed {
+  color: white;
+  background-color: #EF5350;
+}

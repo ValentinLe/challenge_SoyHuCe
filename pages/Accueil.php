@@ -9,10 +9,14 @@
     <header>
       <?php include("parts/nav.php"); ?>
     </header>
-    <h1>Accueil</h1>
-    <form action=<?php echo Router::getIndexPath(); ?> method="post">
-      <input type="text" id="entry" placeholder="Rechercher..." name="search">
-      <button type="submit" id="bSearch">Rechercher</button>
-    </form>
+    <main>
+      <h1>Accueil</h1>
+      <div class="searchZone">
+        <form action=<?php echo Router::getIndexPath(); ?> method="post">
+          <input type="text" id="entry" placeholder="Rechercher..." name="search">
+          <button type="submit" id="bSearch">Rechercher</button>
+        </form>
+    </main>
+    </div>
   </body>
 </html>

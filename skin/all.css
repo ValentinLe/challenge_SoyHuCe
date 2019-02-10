@@ -9,6 +9,109 @@ body {
   padding: 0;
 }
 
-.message {
-  color: blue;
+main {
+  width: 90%;
+  background-color: white;
+  margin: auto;
+  margin-top: 32px;
+  box-shadow: 0 0 0 1px rgba(0,0,0,.15), 0 2px 3px rgba(0,0,0,.2);
+}
+
+h1 {
+  background-image: linear-gradient(175deg, #fb6f4b, #d253b0);
+  padding: 16px;
+  margin: 0;
+  color: white;
+  border-bottom: 3px solid white;
+  text-align: center;
+}
+
+/* menu */
+nav {
+  background-color: #212121;
+  color: white;
+}
+
+nav ul {
+  display: flex;
+  padding: 0;
+  margin: 0;
+}
+
+#menuLeft {
+  float: left;
+  margin-left: 8px;
+}
+
+#menuRight {
+  justify-content: flex-end;
+  margin-right: 32px;
+}
+
+nav li {
+  display: flex;
+  align-items: center;
+  margin-left: 8px;
+  list-style-type: none;
+}
+
+nav span {
+  text-transform: uppercase;
+  color: #FFB74D;
+}
+
+nav a {
+  display: block;
+  padding: 12px 0;
+  color: white;
+  text-decoration: none;
+  transition: 0.2s;
+}
+
+nav a:hover {
+  color: #BDBDBD;
+}
+
+/* barre de recherche */
+.searchZone {
+  padding: 16px;
+  text-align: center;
+}
+
+input, .searchZone button {
+  border: 0;
+  padding: 8px 16px;
+  border-radius: 5px;
+  margin-top: 16px;
+  box-shadow: 0 0 0 1px rgba(0,0,0,.15), 0 2px 3px rgba(0,0,0,.2);
+}
+
+.searchZone input {
+  width: 20%;
+}
+
+form button {
+  padding: 8px 16px;
+  border-radius: 5px;
+  border: 0;
+  box-shadow: 0 0 0 1px rgba(0,0,0,.15), 0 2px 3px rgba(0,0,0,.2);
+  transition: 0.5s;
+  background-color: #212121;
+  color: white;
+}
+
+form button:hover {
+  box-shadow: 0 0 0 2px rgba(0,0,0,.15), 0 4px 6px rgba(0,0,0,.2);
+  transform: scale(1.01);
+  cursor: pointer;
+}
+
+form button:active {
+  transform: scale(0.99);
+}
+
+@media (max-width: 600px) {
+  body {
+    width: 600px;
+  }
 }

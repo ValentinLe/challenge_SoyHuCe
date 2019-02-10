@@ -28,8 +28,12 @@ class Controller {
 
   function toPageSong($songId) {
     $jsonResult = RequestSearchAPI::getSearchWithId($songId);
-    $isFavoris = $this->db->infavoris($songId);
-    $this->view->makePageSong(new SongItem($jsonResult), $isFavoris);
+    if ($jsonResult !== null) {
+      $isFavoris = $this->db->infavoris($songId);
+      $this->view->makePageSong(new SongItem($jsonResult), $isFavoris);
+    } else {
+      $this->view->makeErrorPage();
+    }
   }
 
   function toGraphPage() {
