@@ -19,6 +19,10 @@ class DatabaseFavoris {
     $this->userId = $userId;
   }
 
+  function userConnected() {
+    return $this->userid >= 0;
+  }
+
   /* setter sur l'id de l'utilisateur */
   function setUserId($userId) {
     $this->userId = $userId;
@@ -70,7 +74,7 @@ class DatabaseFavoris {
     return $query->fetchAll(PDO::FETCH_ASSOC);
   }
 
-  /* recupere l'utilisateur dans la bdd */
+  /* recupere l'utilisateur dans la bdd ou false si il n'existe pas */
   function getUser($login) {
     $query = $this->db->query("SELECT * FROM Utilisateur WHERE login='$login'");
     return $query->fetch(PDO::FETCH_ASSOC);

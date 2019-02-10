@@ -68,22 +68,28 @@ class View {
     $duree = $this->getStrDuration($this->getIfExist($data, "trackTimeMillis"));
     $extraitURL = $this->getIfExist($data, "previewUrl");
     $favoris = "";
-    // gestion du button pour ajouter/suppr favoris
-    if ($isFavoris === true) {
-      $favoris = "
-      <p>Ce morceau est présent dans vos favoris.</p>
-      <form action=" . Router::getSupprFavoris($trackId) . " method='post'>
+    
+    if ($this->isConnected === true) {
+      // gestion du button pour ajouter/suppr favoris
+      if ($isFavoris === true) {
+        $favoris = "
+        <p>Ce morceau est présent dans vos favoris.</p>
+        <form action=" . Router::getSupprFavoris($trackId) . " method='post'>
         <input type='hidden' name='delTrackId' value=$trackId>
         <button class='buttonRed' type='submit'>Supprimer</button>
-      </form>";
-    } elseif ($isFavoris === false) {
-      $favoris = "
-      <p>Ce morceau n'est pas dans vos favoris.</p>
-      <form action=" . Router::getAddFavoris($trackId) . " method='post'>
+        </form>";
+      } elseif ($isFavoris === false) {
+        $favoris = "
+        <p>Ce morceau n'est pas dans vos favoris.</p>
+        <form action=" . Router::getAddFavoris($trackId) . " method='post'>
         <input type='hidden' name='addTrackId' value=$trackId>
         <input type='hidden' name='genre' value=$genre>
         <button class='buttonYellow' type='submit'>Favoris</button>
-      </form>";
+        </form>";
+      }
+    } else {
+      $favoris = "<p>Vous devez vous <a href=". Router::getConnexionPath() . ">connecter</a>
+      pour accéder à l'ajout ou retrait de musiques en favoris.</p>";
     }
     include("pages/Song.php");
   }

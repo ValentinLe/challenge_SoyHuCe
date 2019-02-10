@@ -5,6 +5,10 @@ section {
   margin: auto;
 }
 
-h2:first-child {
+section h2 {
+  margin-top: 16px;
+}
+
+section h2:first-child {
   margin-top: 0;
 }

@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="skin/all.css">
+    <link rel="stylesheet" href="skin/connexionCreate.css">
     <title>Créer compte</title>
   </head>
   <body>

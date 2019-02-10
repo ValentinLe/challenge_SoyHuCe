@@ -47,12 +47,19 @@ class Router {
         $this->view->setConnexion(true);
         $this->isConnected = true;
       } else {
-        $this->POSTredirect($this->getConnexionPath(), "Le login ou mot de passe est incorrect");
+        $this->POSTredirect($this->getConnexionPath(), "Le login ou mot de passe est incorrect.");
       }
     } elseif (key_exists("newLogin", $_POST)) {
       // création d'un utilisateur
-      $_SESSION["login"] = $_POST["newLogin"];
-      $this->controller->createUser($_POST["newLogin"], $_POST["newPassword"]);
+      if (!$this->controller->userExists($_POST["newLogin"])) {
+        // si le login n'existe pas
+        $this->isConnected = true;
+        $this->view->setConnexion(true);
+        $_SESSION["login"] = $_POST["newLogin"];
+        $this->controller->createUser($_POST["newLogin"], $_POST["newPassword"]);
+      } else {
+        $this->POSTredirect($this->getCreateUserPath(), "Un utilisateur possède déjà ce login.");
+      }
     } else if (key_exists("search", $_POST)) {
       // recuperation de la recherche et passage en GET
       $this->POSTredirect($this->getSearchPath($_POST["search"]), "");

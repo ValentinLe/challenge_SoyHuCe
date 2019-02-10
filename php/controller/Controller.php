@@ -103,6 +103,11 @@ class Controller {
     $this->view->makeConnexionPage();
   }
 
+  /* renvoi true si il existe un utilisateur du meme login */
+  function userExists($login) {
+    return $this->db->getUser($login) !== false;
+  }
+
   /* renvoi l'utilisateur si le login et le mot de passe sont correct ou false sinon */
   function connect($login, $password) {
     $user = $this->db->getUser($login);

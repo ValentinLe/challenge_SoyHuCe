@@ -19,9 +19,29 @@
         </form>
     </div>
     <section>
-      <h2>Titre</h2>
-      <p><a href="https://affiliate.itunes.apple.com/resources/documentation/itunes-store-web-service-search-api/" target="_blank">Itunes Search API</a>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-      <h2>Titre</h2>
+      <h2>Objectifs</h2>
+      <p>
+        L'objectif de ce projet étant d'intéroger une API et d'utiliser les résultats
+        afin de les afficher dans un tableau. Il fallait également
+        mettre en place un formulaire afin de pouvoir stocker, dans un fichier ou
+        une base de données, le contenu du résultats. Et enfin, interroger une base de
+        données ou l'API pour faire un tableau ou un graphique sur les données récoltées.
+      </p>
+      <h2>Ce qui a été fait</h2>
+      <p>
+        L'utilisateur peut rechercher des musiques ce qui interrogera l'API de Itunes
+        et aura une liste de la réponse. Il peut également se connecter ou créer un
+        compte si il n'en a pas. L'avantage d'avoir un compte est qu'il peut ajouter
+        le nombre dont il souhaite de musique en favoris et constater dans la rubrique
+        <i>Graphique</i> les statistiques sur les genres musicaux qu'il à
+        mis en favoris. Les utilisateurs et les favoris par utilisateur sont stockés
+        dans une base de données.
+      </p>
+      <h2>Source</h2>
+      <ul>
+        <li>API de Itunes : <a href="https://affiliate.itunes.apple.com/resources/documentation/itunes-store-web-service-search-api/" target="_blank">Itunes Search API</a></li>
+        <li>Framework pour le graphique : <a href="https://www.chartjs.org/" target="_blank">Chart.js</a> </li>
+      </ul>
     </section>
   </main>
   </body>
