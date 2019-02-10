@@ -12,7 +12,7 @@
     </header>
     <main>
       <h1>Création d'un nouveau compte</h1>
-      <p><?php echo $this->feedback; ?></p>
+      <?php echo $this->feedback; ?>
       <form action=<?php echo Router::getIndexPath(); ?> method="post">
         <div class="zoneInput">
           <label>Login <input type="text" name="newLogin" required /></label>

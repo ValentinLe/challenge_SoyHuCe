@@ -16,6 +16,11 @@ class View {
     $this->isConnected = $newState;
   }
 
+  /* setter sur le feedback a afficher */
+  function setFeedback($feedback) {
+    $this->feedback = "<p class='feedback'>$feedback</p>";
+  }
+
   /* construit la page d'accueil */
   function makeIndexPage() {
     include("pages/Accueil.php");
@@ -68,7 +73,7 @@ class View {
     $duree = $this->getStrDuration($this->getIfExist($data, "trackTimeMillis"));
     $extraitURL = $this->getIfExist($data, "previewUrl");
     $favoris = "";
-    
+
     if ($this->isConnected === true) {
       // gestion du button pour ajouter/suppr favoris
       if ($isFavoris === true) {

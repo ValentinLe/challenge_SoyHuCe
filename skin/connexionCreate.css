@@ -3,6 +3,10 @@ main {
   width: 800px;
 }
 
+.feedback {
+  margin-bottom: 0;
+}
+
 form {
   margin: auto;
   width: 70%;

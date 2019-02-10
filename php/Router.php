@@ -24,6 +24,12 @@ class Router {
   function main() {
     session_start();
 
+    $feedback = (key_exists("feedback", $_SESSION) ? $_SESSION["feedback"] : "");
+    if ($feedback !== "") {
+      $this->view->setFeedback($feedback);
+      unset($_SESSION["feedback"]);
+    }
+
     // test si l'utilisateur est connecte
     if (key_exists("login", $_SESSION)) {
       $this->db->setUserId($_SESSION["userid"]);
