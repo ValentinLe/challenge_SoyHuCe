@@ -1,5 +1,6 @@
 <?php
 
+/* gere les requete SQL sur la base de donnees */
 class DatabaseFavoris {
 
   const COL_USER_ID = "userid";
@@ -18,67 +19,64 @@ class DatabaseFavoris {
     $this->userId = $userId;
   }
 
+  /* setter sur l'id de l'utilisateur */
   function setUserId($userId) {
     $this->userId = $userId;
   }
 
+  /* lit tous les favoris */
   function readAll() {
     $query = $this->db->query("SELECT * FROM Favoris WHERE userId='$this->userId';");
     return $query->fetchAll(PDO::FETCH_ASSOC);
   }
 
+  /* recupere la musique de l'utilisateur dans les favoris dont l'id de la musique est passe */
   function read($trackId) {
     $query = $this->db->query("SELECT * FROM Favoris WHERE userId=$this->userId AND trackid=$trackId;");
     return $query->fetch(PDO::FETCH_ASSOC);
   }
 
+  /* ajoute à l'utilisateur l'id d'une musique et son genre dans les favoris */
   function addFavoris($trackId, $type) {
     $sql = 'INSERT INTO Favoris(userid,trackid,type) VALUES(:userid,:trackid,:type)';
     $stmt = $this->db->prepare($sql);
-
-    // pass values to the statement
     $stmt->bindValue(':userid', $this->userId);
     $stmt->bindValue(':trackid', $trackId);
     $stmt->bindValue(':type', $type);
-
-    // execute the insert statement
     $stmt->execute();
   }
 
+  /* supprime le favoris de l'utilisateur de l'id donne */
   function removeFavoris($trackId) {
     $sql = 'DELETE FROM Favoris WHERE userid = :userid AND trackid = :trackid';
     $stmt = $this->db->prepare($sql);
-
-    // pass values to the statement
     $stmt->bindValue(':userid', $this->userId);
     $stmt->bindValue(':trackid', $trackId);
-
-    // execute the insert statement
     $stmt->execute();
   }
 
+  /* creer un utilisateur avec le login et le mot de passe donnees */
   function createUser($login, $password) {
     $sql = 'INSERT INTO Utilisateur(login,password) VALUES(:login,:password)';
     $stmt = $this->db->prepare($sql);
-
-    // pass values to the statement
     $stmt->bindValue(':login', $login);
     $stmt->bindValue(':password', $password);
-
-    // execute the insert statement
     $stmt->execute();
   }
 
+  /* recupere la liste (genre: nb occurence) des favoris de l'utilisateur */
   function getStats() {
     $query = $this->db->query("SELECT type, count(type) FROM Favoris WHERE userid=$this->userId GROUP BY type;");
     return $query->fetchAll(PDO::FETCH_ASSOC);
   }
 
+  /* recupere l'utilisateur dans la bdd */
   function getUser($login) {
     $query = $this->db->query("SELECT * FROM Utilisateur WHERE login='$login'");
     return $query->fetch(PDO::FETCH_ASSOC);
   }
 
+  /* renvoi true si la musique n'est pas deja dans les favoris de l'utilisateur  */
   function inFavoris($trackId) {
     $query = $this->db->query("SELECT * FROM Favoris WHERE userid='$this->userId' AND trackid=$trackId");
     return $query->fetch(PDO::FETCH_ASSOC) !== false;

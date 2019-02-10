@@ -5,6 +5,7 @@ require_once("view/View.php");
 require_once("model/RequestSearchAPI.php");
 require_once("db/DatabaseFavoris.php");
 
+/* redirige vers selon les donnees vers la bonne methode du controller */
 class Router {
 
   public $view;
@@ -13,7 +14,7 @@ class Router {
   public $isConnected;
 
   function __construct() {
-    include("db/config.php");
+    include("db/config.php"); // donnees des config de la bdd
     $this->view = new View("", false);
     $this->db = new DatabaseFavoris($pg, -1);
     $this->controller = new Controller($this->view, $this->db);
@@ -109,15 +110,18 @@ class Router {
     }
   }
 
-
+  /* redirige avec un feedback */
   function POSTredirect($url, $feedback) {
     $_SESSION['feedback'] = $feedback;
     header("Location: " . $url, true, 303);
   }
 
+  /* simple redirection */
   function redirect($url) {
     header("Location: " . $url, true, 303);
   }
+
+  /* Getters de path */
 
   static function getIndexPath() {
     return "index.php";

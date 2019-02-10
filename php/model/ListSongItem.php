@@ -1,9 +1,8 @@
 <?php
 
-require_once("Item.php");
 require_once("SongItem.php");
 
-class ListSongItem implements ListItem {
+class ListSongItem {
 
   private $listItem;
 
@@ -11,6 +10,7 @@ class ListSongItem implements ListItem {
     $this->listItem = $this->transformToListSongItem($jsonListSong);
   }
 
+  /* transform un Json avec liste de musique en liste de musique avec leur donnees */
   function transformToListSongItem($listSong) {
     $listItem = array();
     foreach ($listSong as $song) {
@@ -19,11 +19,13 @@ class ListSongItem implements ListItem {
     return $listItem;
   }
 
+  /* getter sur la liste de musique */
   function getListItem() {
     return $this->listItem;
   }
 
-  function contains(Item $item) {
+  /* test si la musique donnee est presente dans la liste */
+  function contains(SongItem $item) {
     foreach ($this->listItem as $item) {
       if ($item->equals($item)) {
         return true;
@@ -32,6 +34,7 @@ class ListSongItem implements ListItem {
     return false;
   }
 
+  /* retourne la taille de la lsite */
   function size() {
     return count($this->listItem);
   }
