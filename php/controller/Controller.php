@@ -95,7 +95,7 @@ class Controller {
 
   /* cree un utilisateur dans la bdd */
   function createUser($login, $password) {
-    $this->db->createUser($login, password_hash($password, PASSWORD_BCRYPT));
+    return $this->db->createUser($login, password_hash($password, PASSWORD_BCRYPT));
   }
 
   /* renvoi sur la page de connexion */

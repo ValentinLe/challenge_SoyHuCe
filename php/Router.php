@@ -61,8 +61,10 @@ class Router {
         // si le login n'existe pas
         $this->isConnected = true;
         $this->view->setConnexion(true);
+        $userId = $this->controller->createUser($_POST["newLogin"], $_POST["newPassword"]);
+        $this->db->setUserId($userId);
         $_SESSION["login"] = $_POST["newLogin"];
-        $this->controller->createUser($_POST["newLogin"], $_POST["newPassword"]);
+        $_SESSION["userid"] = $userId;
       } else {
         $this->POSTredirect($this->getCreateUserPath(), "Un utilisateur possède déjà ce login.");
       }

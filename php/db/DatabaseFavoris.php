@@ -20,7 +20,11 @@ class DatabaseFavoris {
   }
 
   function userConnected() {
-    return $this->userid >= 0;
+    return $this->userId >= 0;
+  }
+
+  function getUserId() {
+    return $this->userId;
   }
 
   /* setter sur l'id de l'utilisateur */
@@ -66,6 +70,14 @@ class DatabaseFavoris {
     $stmt->bindValue(':login', $login);
     $stmt->bindValue(':password', $password);
     $stmt->execute();
+    return $this->getId($login);
+  }
+
+
+  function getId($login) {
+    $sql = "SELECT userid FROM Utilisateur WHERE login='$login'";
+    $query = $this->db->query($sql);
+    return $query->fetch()["userid"];
   }
 
   /* recupere la liste (genre: nb occurence) des favoris de l'utilisateur */
