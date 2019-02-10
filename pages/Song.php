@@ -19,11 +19,28 @@
         </div>
         <div>
           <h2>Informations principales</h2>
-          <p>Artiste(s) : <a href="<?php echo $urlArtist ?>"><?php echo $artistName; ?></a> </p>
-          <p>Durée : <?php echo $duree; ?></p>
-          <p>Date : <?php echo $date; ?> </p>
-          <p>Genre : <?php echo $genre; ?></p>
-          <p>Prix : <?php echo $trackPrice; ?></p>
+          <table>
+            <tr>
+              <td>Artiste(s)</td>
+              <td><a href="<?php echo $urlArtist ?>"><?php echo $artistName; ?></a></td>
+            </tr>
+            <tr>
+              <td>Durée</td>
+              <td><?php echo $duree; ?></td>
+            </tr>
+            <tr>
+              <td>Date</td>
+              <td><?php echo $date; ?></td>
+            </tr>
+            <tr>
+              <td>Genre</td>
+              <td><?php echo $genre; ?></td>
+            </tr>
+            <tr>
+              <td>Prix</td>
+              <td class="prix"><?php echo $trackPrice; ?></td>
+            </tr>
+          </table>
         </div>
       </section>
       <section>
@@ -32,8 +49,16 @@
       <section class="bot">
         <div>
           <h2>Album</h2>
-          <p>Album : <?php echo $collectionName; ?></p>
-          <p>Prix album : <?php echo $collectionPrice; ?></p>
+          <table>
+            <tr>
+              <td>Album</td>
+              <td><a href=<?php echo $collectionUrl; ?>> <?php echo $collectionName; ?></a></td>
+            </tr>
+            <tr>
+              <td>Prix</td>
+              <td class="prix"><?php echo $collectionPrice; ?></td>
+            </tr>
+          </table>
         </div>
         <div>
           <h2>Favoris</h2>

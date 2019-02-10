@@ -42,7 +42,16 @@ class View {
   }
 
   function getIfExist($song, $key) {
-    return (key_exists($key, $song) ? $song[$key] : "Non renseigné");
+    return (key_exists($key, $song) ? $song[$key] : null);
+  }
+
+  function strPrice($price) {
+    if ($price !== null) {
+      $price .= " €";
+    } else {
+      $price = "Non renseigné";
+    }
+    return $price;
   }
 
   function makePageSong(SongItem $song, $isFavoris) {
@@ -52,9 +61,10 @@ class View {
     $artistName = $this->getIfExist($data, "artistName");
     $srcImage = $this->getIfExist($data, "artworkUrl100");
     $date = $this->getStringDate($this->getIfExist($data, "releaseDate"));
-    $trackPrice = $this->getIfExist($data, "trackPrice");
+    $trackPrice = $this->strPrice($this->getIfExist($data, "trackPrice"));
     $collectionName = $this->getIfExist($data, "collectionName");
-    $collectionPrice = $this->getIfExist($data, "collectionPrice");
+    $collectionUrl = $this->getIfExist($data, "collectionViewUrl");
+    $collectionPrice = $this->strPrice($this->getIfExist($data, "collectionPrice"));
     $genre = $this->getIfExist($data, "primaryGenreName");
     $urlArtist = $this->getIfExist($data, "artistViewUrl");
     $duree = $this->getStrDuration($this->getIfExist($data, "trackTimeMillis"));

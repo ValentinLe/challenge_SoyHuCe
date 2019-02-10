@@ -19,6 +19,23 @@ section h1 {
   grid-column: span 2;
 }
 
+table {
+  margin: 0 16px;
+}
+
+table td {
+  padding: 4px;
+}
+
+tr td:first-child {
+  text-align: right;
+}
+
+tr td:first-child::after {
+  content: ":";
+  margin-left: 4px;
+}
+
 .top {
   grid-template-columns: 1fr 3fr;
 }
@@ -43,6 +60,7 @@ audio {
 .buttonRed, .buttonYellow {
   display: block;
   margin: auto;
+  margin-top: 16px;
 }
 
 .buttonYellow {
