@@ -1,4 +1,5 @@
 
+/* premiers test en js */
 
 function requestJson(url, callback) {
   let json;
@@ -57,7 +58,6 @@ window.onload = main;
 
 function main() {
   let bSearch = document.getElementById("bSearch");
-  //$.post("index.php", {test: "oulala"}, () => {});
   bSearch.onclick = () => {
     let input = document.getElementById("entry");
     let text = input.value;

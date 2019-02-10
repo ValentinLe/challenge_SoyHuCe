@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <title>Graphique</title>
     <link rel="stylesheet" href="skin/all.css">
+    <link rel="stylesheet" href="skin/graph.css">
     <script src="../js/chartjs/Chart.js"></script>
     <script src="../js/chartjs/Chart.min.js"></script>
   </head>
@@ -11,7 +12,12 @@
     <header>
       <?php include("parts/nav.php"); ?>
     </header>
-    <canvas id="myChart" width="400" height="400"></canvas>
+    <main>
+      <h1>Statistiques de vos favoris</h1>
+      <div class="graph">
+        <canvas id="myChart" height="100%"></canvas>
+      </div>
+    </main>
     <script>
       var ctx = document.getElementById("myChart").getContext('2d');
       var myChart = new Chart(ctx, {
@@ -19,7 +25,7 @@
         data: {
             labels: <?php echo $labels ?>,
             datasets: [{
-                label: '# of Votes',
+                label: 'Genres musicaux',
                 data: <?php echo $values; ?>,
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
@@ -47,7 +53,9 @@
                         beginAtZero:true
                     }
                 }]
-            }
+            },
+            responsive: true,
+            maintainAspectRatio: true,
         }
       });
     </script>
